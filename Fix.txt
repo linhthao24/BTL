@@ -1,0 +1,16 @@
+Xoa user at same time
+tk test:
+{
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin",
+    "confirmPassword" : "admin",
+    "phone": "0111"
+}
+{
+    "name": "user1",
+    "email": "user1@gmail.com",
+    "password": "12345",
+    "confirmPassword": "12345",
+    "phone": "011"
+}
