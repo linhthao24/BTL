@@ -14,3 +14,28 @@ tk test:
     "confirmPassword": "12345",
     "phone": "011"
 }
+
+call order
+{
+  "orderItems": [
+    {
+      "product": "650595215cfc541b8442a266",
+      "amount": 3,
+      "price": 5, // Giá của sản phẩm
+      "image": "https://res.cloudinary.com/dtahk95yu/image/upload/v1694880644/product_image/zlcjjsigzfbc7d7v1dhv.jpg", // URL hình ảnh sản phẩm
+      "name": "pro5" // Tên sản phẩm
+    }
+  ],
+  "paymentMethod": "Credit Card",
+  "itemsPrice": 15,
+  "shippingPrice": 10,
+  "totalPrice": 25,
+  "fullName": "John Doe",
+  "address": "123 Main St",
+  "city": "Anytown",
+  "phone": "5551234567",
+  "user": "6501e0b446c113110993d0cb",
+  "isPaid": true,
+  "paidAt": "2023-09-17T12:00:00Z",
+  "email": "john.doe@example.com"
+}

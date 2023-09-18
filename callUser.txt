@@ -1,0 +1,42 @@
+Sign up
+{ 
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin",
+    "confirmPassword": "admin",
+    "phone": "011"
+}
+
+Sign in 
+{
+    "email": "admin@gmail.com",
+    "password": "admin"
+}
+
+Update - cai nao trong user cug dc
+{
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin",
+    "isAdmin": true,
+    "confirmPassword": "12345",
+    "phone": "011"
+}
+
+Delete - Yêu cầu cần là admin: id là của admin, trong phần header cài:
+key: token - value: beare +access_token khi admin đăng nhập
+
+getAll - lấy tất cả thông tin người dùng, yêu cầu và cách làm tương tự phần delete
+
+getDetails - lấy thông tin chi tiết của từng cá nhân, tương tự 2 API trên nhưng 
+thay bằng của người dùng hoặc admin đều được
+
+refresh
+cài 2 tham số trong header
+key             value
+token           beare refresh_token
+id              beare id nguoi dung 
+
+logout thi ko co gi ca
+
+
