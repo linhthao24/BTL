@@ -1,9 +1,49 @@
 const ProductService = require('../services/ProductService')
+const asyncHandler = require('express-async-handler')
+const Product = require('../models/ProductModel')
+
+const UploadImage = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).json({
+            status: 'ERR',
+            message: 'No images uploaded'
+        });
+    }
+
+    const imagePaths = req.files.map(file => file.path);
+
+    try {
+        const product = await Product.findById(id);
+
+        if (!product) {
+            return res.status(404).json({
+                status: 'ERR',
+                message: 'Product not found'
+            });
+        }
+        product.image = [];
+        product.image = product.image.concat(imagePaths);
+        await product.save();
+
+        return res.status(200).json({
+            status: 'OK',
+            message: 'Images uploaded successfully',
+            images: imagePaths
+        });
+    } catch (e) {
+        return res.status(500).json({
+            status: 'ERR',
+            message: e.message
+        });
+    }
+});
+
 
 const CreateProduct = async (req, res) => {
     try {
-        const { name, image, type, countInStock, price, rating, description, discount } = req.body
-        if (!name || !image || !type || !countInStock || !price || !rating || !discount) {
+        const { name, type, countInStock, price, rating, description, discount } = req.body
+        if (!name || !type || !countInStock || !price || !rating || !discount) {
             return res.status(200).json({
                 status: 'ERR',
                 message: 'not enough input'
@@ -99,4 +139,5 @@ module.exports = {
     DeleteProduct,
     GetAllProduct,
     GetAllType,
+    UploadImage,
 }
