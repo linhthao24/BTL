@@ -5,14 +5,14 @@ var inlineBase64 = require('nodemailer-plugin-inline-base64');
 
 dotenv.config();
 
-const sendEmailCreateOrder = async (email, orderItems) => {
+const EmailCreateOrder = async (email, orderItems) => {
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
-        secure: true, // true for 465, false for other ports
+        secure: true,
         auth: {
-            user: process.env.MAIL_ACCOUNT, // generated ethereal user
-            pass: process.env.MAIL_PASSWORD, // generated ethereal password
+            user: process.env.MAIL_ACCOUNT,
+            pass: process.env.MAIL_PASSWORD,
         },
     });
     transporter.use('compile', inlineBase64({ cidPrefix: 'somePrefix_' }));
@@ -39,5 +39,5 @@ const sendEmailCreateOrder = async (email, orderItems) => {
 }
 
 module.exports = {
-    sendEmailCreateOrder
+    EmailCreateOrder
 }
