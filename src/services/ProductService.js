@@ -159,12 +159,35 @@ const GetAllType = () => {
         }
     })
 }
+const GetByType = (type) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const products = await Product.find({ type });
 
+            if (!products || products.length === 0) {
+                resolve({
+                    status: 'OK',
+                    message: 'No products found for this type',
+                    data: [],
+                });
+            } else {
+                resolve({
+                    status: 'OK',
+                    message: 'Success',
+                    data: products,
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
 module.exports = {
     CreateProduct,
     UpdateProduct,
     GetDetailsProduct,
     DeleteProduct,
     GetAllProduct,
-    GetAllType
+    GetAllType,
+    GetByType
 }
