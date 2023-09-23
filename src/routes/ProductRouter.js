@@ -14,5 +14,6 @@ routers.get('/getDetails/:id', ProductController.GetDetailsProduct)
 routers.delete('/delete/:id', authMiddleWare, ProductController.DeleteProduct)
 routers.get('/getAll', ProductController.GetAllProduct)
 routers.get('/getAllType', ProductController.GetAllType)
+routers.get('/getByType/:type', ProductController.GetByType);
 
 module.exports = routers
