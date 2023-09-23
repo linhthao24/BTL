@@ -132,6 +132,27 @@ const GetAllType = async (req, res) => {
         })
     }
 }
+const GetByType = async (req, res) => {
+    try {
+        const type = req.params.type;
+
+        if (!type) {
+            return res.status(400).json({
+                status: 'ERR',
+                message: 'Type is required',
+            });
+        }
+
+        const response = await ProductService.GetByType(type);
+
+        return res.status(200).json(response);
+    } catch (e) {
+        return res.status(500).json({
+            status: 'ERR',
+            message: e.message,
+        });
+    }
+}
 module.exports = {
     CreateProduct,
     UpdateProduct,
@@ -140,4 +161,5 @@ module.exports = {
     GetAllProduct,
     GetAllType,
     UploadImage,
+    GetByType
 }
