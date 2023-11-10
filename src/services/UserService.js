@@ -20,7 +20,8 @@ const CreateUser = (newUser) => {
                 email,
                 BasePass: password,
                 password: hash,
-                phone
+                phone,
+                point: 0
             })
             if (CreatedUser) {
                 resolve({
@@ -98,7 +99,11 @@ const UpdateUser = (id, data) => {
                 const hashedPassword = bcrypt.hashSync(data.password, 10);
                 data.password = hashedPassword;
             }
+            
             const updatedUser = await User.findByIdAndUpdate(id, data, { new: true })
+            if (data.point) {
+                updatedUser.point = data.point;
+            }
             resolve({
                 status: 'OK',
                 message: 'SUCCESS',
