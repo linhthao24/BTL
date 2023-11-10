@@ -84,23 +84,24 @@ const LoginUser = (userLogin) => {
 const UpdateUser = (id, data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const checkUser = await User.findOne({
-                _id: id
-            })
-            console.log(checkUser)
+            const checkUser = await User.findOne({ _id: id });
+            console.log(checkUser);
             if (checkUser === null) {
                 resolve({
                     status: 'ERR',
                     message: 'The user is not defined'
-                })
+                });
             }
             if (data.password) {
                 data.BasePass = data.password;
                 const hashedPassword = bcrypt.hashSync(data.password, 10);
                 data.password = hashedPassword;
             }
-            
-            const updatedUser = await User.findByIdAndUpdate(id, data, { new: true })
+
+            // Remove isAdmin field from the update data
+            delete data.isAdmin;
+
+            const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
             if (data.point) {
                 updatedUser.point = data.point;
             }
@@ -108,12 +109,12 @@ const UpdateUser = (id, data) => {
                 status: 'OK',
                 message: 'SUCCESS',
                 data: updatedUser
-            })
+            });
         } catch (e) {
-            reject(e)
+            reject(e);
         }
-    })
-}
+    });
+};
 const DeleteUser = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
